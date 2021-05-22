@@ -45,7 +45,7 @@ module.exports.deleteGuitarById = (req, res) => {
         else if (!guitar)
             res.status(404).send({message: "Guitar not found"})
         else
-            res.status(200).send(guitar);
+            res.status(204).send();
     })
 }
 
