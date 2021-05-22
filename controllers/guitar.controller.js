@@ -22,7 +22,7 @@ module.exports.getGuitarById = (req, res) => {
     Guitar.findById(req.params._id).exec((err, guitar) => {
         if (err)
             res.status(500).send({message: "Internal server error"})
-        else if (guitar)
+        else if (!guitar)
             res.status(404).send({message: "Guitar not found"})
         else
             res.status(200).send(guitar);

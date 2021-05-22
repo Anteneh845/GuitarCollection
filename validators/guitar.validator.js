@@ -1,5 +1,5 @@
 module.exports.createGuitarValidator = (req, res, next) => {
-    if (req.body.type && req.body.link && req.body.stringType && req.body.year && req.body.year)
+    if (!req.body.type && !req.body.link && !req.body.stringType && !req.body.year && !req.body.brand)
         res.status(400).send("Please input all guitar attributes")
     else
         next();
