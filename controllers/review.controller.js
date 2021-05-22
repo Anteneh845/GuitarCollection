@@ -11,7 +11,7 @@ module.exports.createReview = (req, res) => {
             const review = {
                 review: req.body.review,
                 reviewedBy: {
-                    user: "Random User" // Change when authentication is integrated
+                    name: "Random User" // Change when authentication is integrated
                 }
             };
             guitar.reviews.push(review);

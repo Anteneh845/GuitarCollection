@@ -1,4 +1,4 @@
-const {model, Schema, ObjectId} = require("mongoose");
+const {model, ObjectId, Schema} = require("mongoose");
 
 const reviewSchema = new Schema({
     review: {type: String, required: true},
@@ -15,7 +15,8 @@ const guitarSchema = new Schema({
     year: {type: Number, required: true},
     link: {type: String, required: true},
     stringType: {type: String, enum: ["Steel", "Nylon"], default: "Steel"},
-    reviews: [reviewSchema]
+    reviews: [reviewSchema],
+    createdBy: {type: ObjectId, ref: "User", required: true}
 });
 
 model("Guitar", guitarSchema);
