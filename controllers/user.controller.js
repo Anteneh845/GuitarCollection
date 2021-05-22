@@ -43,7 +43,7 @@ module.exports.deleteUserById = (req, res) => {
 }
 
 module.exports.updateUser = (req, res) => {
-    User.findByIdAndUpdate(req.params._id, req.body, {new: true}, (err, user) => {
+    User.findByIdAndUpdate(req.params._id, {...req.body, updatedOn: Date.now()}, {new: true}, (err, user) => {
         if (err)
             res.status(500).json({message: "Internal server error"})
         else if (!user)

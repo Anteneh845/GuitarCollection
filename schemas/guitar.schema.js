@@ -16,7 +16,9 @@ const guitarSchema = new Schema({
     link: {type: String, required: true},
     stringType: {type: String, enum: ["Steel", "Nylon"], default: "Steel"},
     reviews: [reviewSchema],
-    createdBy: {type: ObjectId, ref: "User", required: true}
+    createdBy: {type: ObjectId, ref: "User", required: true},
+    createdOn: {type: Date, default: Date.now()},
+    updatedOn: {type: Date, default: Date.now()},
 });
 
 model("Guitar", guitarSchema);

@@ -42,7 +42,7 @@ module.exports.deleteGuitarById = (req, res) => {
     Guitar.findByIdAndDelete(req.params._id).exec((err, guitar) => {
         if (err)
             res.status(500).send({message: "Internal server error"})
-        else if (guitar)
+        else if (!guitar)
             res.status(404).send({message: "Guitar not found"})
         else
             res.status(200).send(guitar);
@@ -50,9 +50,11 @@ module.exports.deleteGuitarById = (req, res) => {
 }
 
 module.exports.updateGuitar = (req, res) => {
-    Guitar.findByIdAndUpdate(req.params._id, req.body).exec((err, guitar) => {
+    Guitar.findByIdAndUpdate(req.params._id, {...req.body, updatedOn: Date.now()}, {new: true}).exec((err, guitar) => {
         if (err)
             res.status(500).send({message: "Internal server error"})
+        else if (!guitar)
+            res.status(404).json({message: "Guitar not found"})
         else
             res.status(200).send(guitar);
     })
