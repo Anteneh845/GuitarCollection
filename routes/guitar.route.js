@@ -14,14 +14,16 @@ const {
     getGuitarById,
     getGuitarList,
     updateGuitar,
-    updateGuitarPartially
 } = require("../controllers/guitar.controller")
 
 const {
     guitarIdUrlValidator,
     createGuitarValidator,
     updateGuitarValidator,
-    getGuitarListValidator
+    getGuitarListValidator,
+    reviewIdUrlValidator,
+    createReviewValidator,
+    updateReviewValidator
 } = require("../validators/guitar.validator");
 
 // Guitar routes
@@ -36,11 +38,11 @@ router
 
 // Guitar reviews routes
 router
-    .get("/guitars/:guitarId/reviews/", getReviewList)
-    .get("/guitars/:guitarId/reviews/:reviewId", getReviewById)
-    .delete("/guitars/:guitarId/reviews/:reviewId", deleteReviewById)
-    .put("/guitars/:guitarId/reviews/:reviewId", updateReview)
-    .post("/guitars/:guitarId/reviews", createReview)
+    .get("/guitars/:guitarId/reviews/", guitarIdUrlValidator, getReviewList)
+    .get("/guitars/:guitarId/reviews/:reviewId", reviewIdUrlValidator, getReviewById)
+    .delete("/guitars/:guitarId/reviews/:reviewId", reviewIdUrlValidator, deleteReviewById)
+    .put("/guitars/:guitarId/reviews/:reviewId", updateReviewValidator, updateReview)
+    .post("/guitars/:guitarId/reviews", createReviewValidator, createReview)
 
 
 module.exports = router;

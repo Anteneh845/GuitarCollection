@@ -30,7 +30,36 @@ module.exports.getGuitarListValidator = (req, res, next) => {
 
 module.exports.guitarIdUrlValidator = (req, res, next) => {
     if (!req.params._id)
-        res.status(400).send("Please pass the user id in the URL")
+        res.status(400).json("Please pass the guitar id in the URL")
+    else
+        next();
+}
+
+
+module.exports.reviewIdUrlValidator = (req, res, next) => {
+    if (!req.params.guitarId && !req.params.reviewId)
+        res.status(400).json({message: "Please pass the guitar id and review id in the URL"});
+    else
+        next();
+}
+
+module.exports.createReviewValidator = (req, res, next) => {
+    if (!req.params.guitarId)
+        res.status(400).json({message: "Please pass the guitar ID in the URL"});
+    else if (!req.body.review)
+        res.status(400).json({message: "review is required"});
+    else
+        next();
+}
+
+
+module.exports.updateReviewValidator = (req, res, next) => {
+    if (!req.params.guitarId)
+        res.status(400).json({message: "Please pass the guitar ID in the URL"})
+    else if (!req.params.guitarId)
+        res.status(400).json({message: "Please pass the review Id in the URL"})
+    else if (!req.body.review)
+        res.status(400).json({message: "review is required"})
     else
         next();
 }
