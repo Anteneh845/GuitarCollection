@@ -29,7 +29,7 @@ module.exports.getGuitarListValidator = (req, res, next) => {
 }
 
 module.exports.guitarIdUrlValidator = (req, res, next) => {
-    if (!req.params._id)
+    if (!req.params.guitarId)
         res.status(400).json("Please pass the guitar id in the URL")
     else
         next();

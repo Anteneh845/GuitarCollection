@@ -36,8 +36,9 @@ module.exports.deleteReviewById = (req, res) => {
             if (reviewIndex !== -1) {
                 guitar.reviews.splice(reviewIndex, 1);
                 guitar.save(err => {
-                    if (err) res.status(500).json({message: "Interval server"})
+                    if (err) res.status(500).json({message: "Interval server err "+err})
                 })
+                res.status(204).send();
             } else
                 res.status(404).json({message: "review not found"})
         }
@@ -72,9 +73,9 @@ module.exports.getReviewById = (req, res) => {
 }
 
 module.exports.updateReview = (req, res) => {
-    Guitar.findById(req.params.guitarId, (err, guitar) => {
+    Guitar.findByIdAndUpdate(req.params.guitarId, {...req.body, updatedOn: Date.now()}, {new: true}, (err, guitar) => {
         if (err)
-            res.status(500).json({message: "Internal server error"});
+            res.status(500).json({message: "Internal server error " + err});
         else if (!guitar)
             res.status(404).json({message: "Guitar not found"});
         else {
@@ -84,6 +85,7 @@ module.exports.updateReview = (req, res) => {
                 guitar.save(err => {
                     if (err) res.status(500).json({message: "Interval server"})
                 })
+                res.status(200).json(guitar.reviews[reviewIndex]);
             } else
                 res.status(404).json({message: "review not found"})
         }

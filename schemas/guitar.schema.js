@@ -6,7 +6,8 @@ const reviewSchema = new Schema({
         // userId: {type: ObjectId, required: true},
         name: {type: String, required: true}
     },
-    createdDate: {type: Date, default: Date.now()}
+    createdOn: {type: Date, default: Date.now()},
+    updatedOn: {type: Date, default: Date.now()},
 })
 
 const guitarSchema = new Schema({
